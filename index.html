@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Analysis Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f7f9fc;
+            font-weight: bold;
+        }
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .result {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .profit-percent {
+            font-weight: bold;
+            background-color: #32cd32;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #3498db;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sales-property {
+            margin-top: 5px;
+            height: 42px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .salesPropertyWrapper {
+            align-items: center;
+            gap: 8px;
+        }
+        .salesPropertyWrapper input {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Springboard To Wealth Deal Analysis Calculator</h1>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Input</th>
+            </tr>
+            <tr>
+                <td class="tooltip">Purchase Price
+                    <span class="tooltiptext">Price of the land including all commissions. The amount the buyer needs to write a check for.</span>
+                </td>
+                <td><input type="text" id="purchasePrice" placeholder="$"></td>
+            </tr>
+            <tr>
+                <td class="tooltip">Construction costs per sq ft
+                    <span class="tooltiptext">Use an all-in number here. For flips, use 40 to 150. For new construction, use 200 to 250.</span>
+                </td>
+                <td><input type="text" id="costPerSqFt" placeholder="$"></td>
+            </tr>
+            <tr>
+                <td class="tooltip">Total building Sq footage (ft)
+                    <span class="tooltiptext">Total building square footage.</span>
+                </td>
+                <td><input type="text" id="sqFootage" placeholder="ft"></td>
+            </tr>
+            <tr>
+                <td class="tooltip">Finished Value of Project
+                    <span class="tooltiptext">Expected market value of the property upon completion.</span>
+                </td>
+                <td><input type="text" id="finishedValue" placeholder="$"></td>
+            </tr>
+        </table>
+
+        <h2>Results</h2>
+        <table>
+            <tr>
+                <td class="tooltip">Total Construction Budget
+                    <span class="tooltiptext">The construction budget is 40% to 50% of the ARV for new construction.</span>
+                </td>
+                <td class="result" id="totalBudget">$0</td>
+            </tr>
+            <tr>
+                <td class="tooltip">Project Costs
+                    <span class="tooltiptext">Total of land and construction costs. Should be 65% to 75% of ARV for new builds or up to 80% for flips.</span>
+                </td>
+                <td class="result" id="projectCosts">$0</td>
+            </tr>
+            <tr>
+                <td class="tooltip">Land Cost as a % of Finished Value
+                    <span class="tooltiptext">Land cost divided by finished value. Typical range is 20% to 25%.</span>
+                </td>
+                <td class="result" id="landCostPercent">0%</td>
+            </tr>
+            <tr>
+                <td class="tooltip">Acq and Const. Combined Cost as a % of Finished Value
+                    <span class="tooltiptext">(Land cost + construction cost) divided by finished value. Should not exceed 80%.</span>
+                </td>
+                <td class="result" id="combinedCostPercent">0%</td>
+            </tr>
+            <tr>
+                <td class="tooltip sales-property">Sales and Property Costs
+                    <span class="tooltiptext">Typically includes agent commissions (6%), sales costs (2%), and taxes (1%).</span>
+                </td>
+                <td class="salesPropertyWrapper">
+                    <span class="result" id="salesPropertyCosts">$0</span>
+                    <input type="text" id="salesPropertyPercent" placeholder="%" oninput="calculate()">
+                </td>
+            </tr>
+            <tr>
+                <td class="tooltip">Potential Profit dollars and % W no carry costs
+                    <span class="tooltiptext">Profit excluding financing costs. Builders aim for 15% or more.</span>
+                </td>
+                <td>
+                    <span class="result" id="potentialProfit">$0</span>
+                    <span class="profit-percent" id="potentialProfitPercent">0%</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // Função para formatar números com pontos e vírgulas
+        function formatNumber(input) {
+            let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            let formattedValue = new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }).format(value / 100); // Divide por 100 para incluir decimais
+            input.value = formattedValue;
+        }
+    
+        function calculate() {
+            const purchasePrice = parseFloat(document.getElementById('purchasePrice').value.replace(/\./g, '').replace(',', '.')) || 0;
+            const costPerSqFt = parseFloat(document.getElementById('costPerSqFt').value.replace(/\./g, '').replace(',', '.')) || 0;
+            const sqFootage = parseFloat(document.getElementById('sqFootage').value.replace(/\./g, '').replace(',', '.')) || 0;
+            const finishedValue = parseFloat(document.getElementById('finishedValue').value.replace(/\./g, '').replace(',', '.')) || 0;
+            const salesPropertyPercent = parseFloat(document.getElementById('salesPropertyPercent').value.replace(/\./g, '').replace(',', '.')) || 0;
+    
+            // Calculations
+            const totalBudget = sqFootage * costPerSqFt;
+            const projectCosts = totalBudget + purchasePrice;
+            const salesPropertyCosts = finishedValue * (salesPropertyPercent / 100);
+            const potentialProfit = finishedValue - salesPropertyCosts - projectCosts;
+            const potentialProfitPercent = (potentialProfit / finishedValue) * 100;
+    
+            const landCostPercent = (purchasePrice / finishedValue) * 100;
+            const combinedCostPercent = (projectCosts / finishedValue) * 100;
+    
+            // Update results
+            document.getElementById('totalBudget').textContent = `$${totalBudget.toFixed(2)}`;
+            document.getElementById('projectCosts').textContent = `$${projectCosts.toFixed(2)}`;
+            document.getElementById('salesPropertyCosts').textContent = `$${salesPropertyCosts.toFixed(2)}`;
+            document.getElementById('potentialProfit').textContent = `$${potentialProfit.toFixed(2)}`;
+            document.getElementById('potentialProfitPercent').textContent = `${potentialProfitPercent.toFixed(2)}%`;
+            document.getElementById('landCostPercent').textContent = `${landCostPercent.toFixed(2)}%`;
+            document.getElementById('combinedCostPercent').textContent = `${combinedCostPercent.toFixed(2)}%`;
+    
+            // Update background color for profit percent
+            const profitPercentElement = document.getElementById('potentialProfitPercent');
+            profitPercentElement.style.backgroundColor = potentialProfitPercent < 15 ? 'red' : '#32cd32';
+        }
+    
+        // Adicionar o evento de formatação aos inputs
+        const inputsToFormat = ['purchasePrice', 'costPerSqFt', 'sqFootage', 'finishedValue', 'salesPropertyPercent'];
+        inputsToFormat.forEach(id => {
+            const input = document.getElementById(id);
+            input.addEventListener('input', () => {
+                formatNumber(input);
+                calculate();
+            });
+        });
+    
+        // Attach input event listener to all fields
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => input.addEventListener('input', calculate));
+    </script>
+    
+</body>
+</html>
