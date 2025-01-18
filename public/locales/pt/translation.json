@@ -1,0 +1,22 @@
+{
+  "header": {
+    "title": "OfficeSpace",
+    "searchPlaceholder": "Pesquisar escritórios",
+    "advertise": "Anuncie o seu espaço",
+    "profile": {
+      "login": "Entrar",
+      "signup": "Registar-se"
+    }
+  },
+  "footer": {
+    "copyright": "Todos os direitos reservados."
+  },
+  "categories": {
+    "coworking": "Espaço de Coworking",
+    "privateRooms": "Salas Privadas",
+    "openSpace": "Espaços Abertos",
+    "meetingRooms": "Salas de Reunião",
+    "virtualOffices": "Escritórios Virtuais",
+    "compactRooms": "Salas Compactas"
+  }
+}
