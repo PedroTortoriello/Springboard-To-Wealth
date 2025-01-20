@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './style.css';
+import { IoIosInformationCircleOutline } from 'react-icons/io';
 import Header from '@/layout/DefaultLayout';
 const TableDisplay: React.FC = () => {
   const [purchasePrice, setPurchasePrice] = useState("");
@@ -25,6 +26,7 @@ const TableDisplay: React.FC = () => {
   const [HOA, setHOA] = useState("");
   const [MonthlyRent, setMonthlyRent] = useState("");
   const [PropertyManagement1, setPropertyManagement1] = useState("");
+  const [selectedDescription, setSelectedDescription] = useState<string | null>(null);
 
   const [results, setResults] = useState({
     totalBudget: 0,
@@ -168,6 +170,28 @@ const TableDisplay: React.FC = () => {
     });
   };
 
+  const descriptions = {
+    purchasePrice: "Price of the land including all commissions. The amount the buyer needs to write a check for.",
+    costPerSqFt: "Use an all in # here - Flips 40 to 150 in Seattle, New Construction 200-250. See Scope tab for more info.",
+    sqFootage: "Total building Sq footage.",
+    finishedValue: "What will it sell for based on comps today.",
+    totalBudget: "Construction Costs × Total Sq Footage. This should typically represent 40 to 50% of the ARV for new construction.",
+    projectCosts: "Land costs plus total construction costs. For new construction, it should be 65 to 75% of the ARV, and up to 80% for flips.",
+    landCostPercent: "The percentage of the land cost relative to the finished project value (ARV).",
+    combinedCostPercent: "The total costs, including land and construction, as a percentage of the finished value of the project.",
+    salesPropertyCosts: "Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value.",
+    potentialProfit: "Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit."
+  };
+  
+
+  function Tooltip({ message }: { message: string }) {
+    return (
+      <div className="absolute -top-10 left-0 w-64 p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
+        {message}
+      </div>
+    );
+  }
+
   useEffect(() => {
     calculate();
   }, [purchasePrice, costPerSqFt, sqFootage, finishedValue, salesPropertyPercent, expectedCarry, UtilitiesInsurance, HardmoneyDown, InterestRate, LoanDown, Points, Reserve]);
@@ -177,87 +201,310 @@ const TableDisplay: React.FC = () => {
     <div className="p-6">
 
         <div className="flex flex-wrap">
-          <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold  text-gray-800 mb-4">Springboard To Wealth Deal Analysis Calculator</h2>
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Field</th>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Input</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Purchase Price</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={purchasePrice} onChange={(e) => setPurchasePrice(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Construction costs per sq ft</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={costPerSqFt} onChange={(e) => setCostPerSqFt(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Total building Sq footage (ft)</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={sqFootage} onChange={(e) => setSqFootage(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="ft" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Finished Value of Project</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={finishedValue} onChange={(e) => setFinishedValue(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
+  <div className="p-6 shadow-lg rounded-lg">
+    <h2 className="text-xl font-semibold text-gray-800 mb-4">Springboard To Wealth Deal Analysis Calculator</h2>
+    <span className="ml-2 text-gray-500 flex items-center">
+      <IoIosInformationCircleOutline className="text-sm mr-1" />
+      Click to view description
+    </span>
+    <table className="w-full border-collapse">
+      <thead>
+        <tr>
+          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Field</th>
+          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Input</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/* Campo 1 */}
+        <tr className="relative">
+          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.purchasePrice ? null : descriptions.purchasePrice
+                )
+              }
+            >Purchase Price
+            </span>
+            {selectedDescription === descriptions.purchasePrice && (
+              <Tooltip message={descriptions.purchasePrice} />
+            )}
+          </td>
+          <td className="py-1 px-4 border-b border-gray-200">
+            <input
+              type="text"
+              value={purchasePrice}
+              onChange={(e) => setPurchasePrice(formatNumber(e.target.value))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="$"
+            />
+          </td>
+        </tr>
+
+        {/* Campo 2 */}
+        <tr className="relative">
+          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+           
+            <span
+              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.costPerSqFt ? null : descriptions.costPerSqFt
+                )
+              }
+            > 
+            Construction costs per sq ft
+            </span>
+            {selectedDescription === descriptions.costPerSqFt && (
+              <Tooltip message={descriptions.costPerSqFt} />
+            )}
+          </td>
+          <td className="py-1 px-4 border-b border-gray-200">
+            <input
+              type="text"
+              value={costPerSqFt}
+              onChange={(e) => setCostPerSqFt(formatNumber(e.target.value))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="$"
+            />
+          </td>
+        </tr>
+
+        {/* Campo 3 */}
+        <tr className="relative">
+          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+            
+            <span
+              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.sqFootage ? null : descriptions.sqFootage
+                )
+              }
+            >
+            Total building Sq footage (ft)
+            </span>
+            {selectedDescription === descriptions.sqFootage && (
+              <Tooltip message={descriptions.sqFootage} />
+            )}
+          </td>
+          <td className="py-1 px-4 border-b border-gray-200">
+            <input
+              type="text"
+              value={sqFootage}
+              onChange={(e) => setSqFootage(formatNumber(e.target.value))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="ft"
+            />
+          </td>
+        </tr>
+
+        {/* Campo 4 */}
+        <tr className="relative">
+          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+            
+            <span
+              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.finishedValue ? null : descriptions.finishedValue
+                )
+              }
+            >
+            Finished Value of Project
+            </span>
+            {selectedDescription === descriptions.finishedValue && (
+              <Tooltip message={descriptions.finishedValue} />
+            )}
+          </td>
+          <td className="py-1 px-4 border-b border-gray-200">
+            <input
+              type="text"
+              value={finishedValue}
+              onChange={(e) => setFinishedValue(formatNumber(e.target.value))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="$"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Results</h2>
-              <table className="w-full border-collapse">
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Total Construction Budget</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.totalBudget.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Project Costs</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.projectCosts.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Land Cost as a % of Finished Value</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">{results.landCostPercent.toFixed(2)}%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Combined Cost as a % of Finished Value</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">{results.combinedCostPercent.toFixed(2)}%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Sales and Property Costs</td>
-                    <td className="py-3 px-4 flex items-center border-b border-gray-200">
-                      <span className="font-bold text-gray-700 mr-2">${results.salesPropertyCosts.toFixed(2)}</span>
-                      <input type="text" value={salesPropertyPercent} onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))} className="px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20" placeholder="%" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Potential Profit</td>
-                    <td className="py-3 px-4 flex items-center border-b border-gray-200">
-                      <span className="font-bold text-gray-700 mr-2">${results.potentialProfit.toFixed(2)}</span>
-                      <span className={`px-3 py-2 rounded-md text-white ${results.potentialProfitPercent < 15 ? "bg-red-500" : "bg-[#44C63A]"}`}>{results.potentialProfitPercent.toFixed(2)}%</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+  <div className="p-6 shadow-lg rounded-lg">
+    <h2 className="text-xl font-semibold text-gray-800 mb-4">Results</h2>
+    <span className="ml-2 text-gray-500 flex items-center">
+      <IoIosInformationCircleOutline className="text-sm mr-1" />
+      Click to view description
+    </span>
+
+    <table className="w-full border-collapse">
+      <tbody>
+        <tr className="relative">
+          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.totalBudget
+                    ? null
+                    : descriptions.totalBudget
+                )
+              }
+            >
+              Total Construction Budget
+            </span>
+            {selectedDescription === descriptions.totalBudget && (
+              <Tooltip message={descriptions.totalBudget} />
+            )}
+          </td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+            ${results.totalBudget.toFixed(2)}
+          </td>
+        </tr>
+        <tr className="relative">
+          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.projectCosts
+                    ? null
+                    : descriptions.projectCosts
+                )
+              }
+            >
+              Project Costs
+            </span>
+            {selectedDescription === descriptions.projectCosts && (
+              <Tooltip message={descriptions.projectCosts} />
+            )}
+          </td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+            ${results.projectCosts.toFixed(2)}
+          </td>
+        </tr>
+        <tr className="relative">
+          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.landCostPercent
+                    ? null
+                    : descriptions.landCostPercent
+                )
+              }
+            >
+              Land Cost as a % of Finished Value
+            </span>
+            {selectedDescription === descriptions.landCostPercent && (
+              <Tooltip message="The percentage of the land cost relative to the finished project value (ARV)." />
+            )}
+          </td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+            {results.landCostPercent.toFixed(2)}%
+          </td>
+        </tr>
+        <tr className="relative">
+          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.combinedCostPercent
+                    ? null
+                    : descriptions.combinedCostPercent
+                )
+              }
+            >
+              Combined Cost as a % of Finished Value
+            </span>
+            {selectedDescription === descriptions.combinedCostPercent && (
+              <Tooltip message="The total costs, including land and construction, as a percentage of the finished value of the project." />
+            )}
+          </td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+            {results.combinedCostPercent.toFixed(2)}%
+          </td>
+        </tr>
+        <tr className="relative">
+          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.salesPropertyCosts
+                    ? null
+                    : descriptions.salesPropertyCosts
+                )
+              }
+            >
+              Sales and Property Costs
+            </span>
+            {selectedDescription === descriptions.salesPropertyCosts && (
+              <Tooltip message="Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value." />
+            )}
+          </td>
+          <td className="py-1 px-10 items-center">
+            <span className="font-bold text-gray-700 mr-2">
+              ${results.salesPropertyCosts.toFixed(2)}
+            </span>
+            <input
+              type="text"
+              value={salesPropertyPercent}
+              onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))}
+              className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-25"
+              placeholder="%"
+            />
+          </td>
+        </tr>
+        <tr className="relative">
+          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span
+              className="cursor-pointer text-blue-500"
+              onClick={() =>
+                setSelectedDescription(
+                  selectedDescription === descriptions.potentialProfit
+                    ? null
+                    : descriptions.potentialProfit
+                )
+              }
+            >
+              Potential Profit
+            </span>
+            {selectedDescription === descriptions.potentialProfit && (
+              <Tooltip message="Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit." />
+            )}
+          </td>
+          <td className="py-3 px-4 items-center border-b border-gray-200">
+            <span className="font-bold text-gray-700 mr-2">
+              ${results.potentialProfit.toFixed(2)}
+            </span>
+            <span
+  className={`px-3 py-2 rounded-md text-white ${
+    (results.potentialProfitPercent < 15 || isNaN(results.potentialProfitPercent))
+      ? 'bg-red-500'
+      : 'bg-[#44C63A]'
+  }`}
+>
+  {(isNaN(results.potentialProfitPercent) ? 0 : results.potentialProfitPercent).toFixed(2)}%
+</span>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
     
-          <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
+          <div className="w-full md:w-1/2 lg:w-2/5 px-3 mb-6">
         <div className="p-6 bg-gray-50 shadow-lg rounded-lg">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Carry Costs</h2>
               <table className="w-full border-collapse">
@@ -425,7 +672,9 @@ const TableDisplay: React.FC = () => {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Monthly Principal + Interest</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.MonthlyPrincipal.toFixed(2)}</td>
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+                      ${isNaN(results.MonthlyPrincipal) ? 0 : results.MonthlyPrincipal.toFixed(2)}
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">TAX (Annual)</td>
@@ -441,7 +690,9 @@ const TableDisplay: React.FC = () => {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Monthly Payment (PITI)</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.MonthlyPayment.toFixed(2)}</td>
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+                      ${isNaN(results.MonthlyPayment) ? 0 : results.MonthlyPayment.toFixed(2)}
+                    </td>
                   </tr>
                 </tbody>
               </table>
