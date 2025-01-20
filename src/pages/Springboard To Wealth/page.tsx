@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-
+import './style.css';
+import Header from '@/layout/DefaultLayout';
 const TableDisplay: React.FC = () => {
   const [purchasePrice, setPurchasePrice] = useState("");
   const [costPerSqFt, setCostPerSqFt] = useState("");
@@ -46,7 +47,6 @@ const TableDisplay: React.FC = () => {
     LoanAmountCalc: 0,
     AppraisedValueCalc: 0,
     EquityAmountCalc: 0,
-    LoanAmountDownCalc: 0,
     MonthlyPrincipal: 0,
     MonthlyPayment: 0,
     PropertyManagentCalc: 0,
@@ -77,6 +77,7 @@ const TableDisplay: React.FC = () => {
     // const HardmoneyfeesNum = parseValue(Hardmoneyfees);
     const ReserveNum = parseValue(Reserve);
     const InterestRateNum = parseValue(InterestRate);
+    const InterestRateNum2 = parseValue(InterestRate2);
     const LoanDownNum = parseValue(LoanDown);
     const PointsNum = parseValue(Points);
     const EquityNum = parseValue(Equity);
@@ -118,22 +119,17 @@ const TableDisplay: React.FC = () => {
     
     const CashOnHandCalc = (hardMoneyPaymentCalc * expectedCarryNum) + HardmoneyDownCalc + HardMoneyPointsCalc + HardMoneyFeesCalc + ReserveCalc + utilitesInsuranceCalc;
   
-    const LoanAmountCalc = projectCosts - HardmoneyDownCalc;
+    const LoanAmountCalc = finishedValueNum - ((EquityNum / 100) * finishedValueNum);
   
     const AppraisedValueCalc = finishedValueNum;
+
   
-    const EquityAmountCalc = ((EquityNum / 100) * AppraisedValueCalc);
+    const EquityAmountCalc = ((EquityNum / 100) * (AppraisedValueCalc));
   
-    const LoanAmountDownCalc = AppraisedValueCalc - ((EquityNum / 100) * AppraisedValueCalc);
-  
-    const monthlyInterestRate = (InterestRateNum / 100) / 12;
-    const numberOfPayments = LoanTermNum * 12;
-  
-    let MonthlyPrincipal = 0;
-    if (monthlyInterestRate !== 0 && numberOfPayments !== 0) {
-      MonthlyPrincipal = (AppraisedValueCalc - (AppraisedValueCalc * (EquityNum / 100))) * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)));
-    }
-  
+    const EquityPercent = (EquityNum/100)
+    
+    const MonthlyPrincipal = (finishedValueNum - (finishedValueNum * EquityPercent)) * (((InterestRateNum2) / 100) / 12) / (1 - Math.pow(1 + (InterestRateNum2 / (100 * 12)), -(LoanTermNum * 12)));
+
     const MonthlyPayment = MonthlyPrincipal + (TaxAnualNum / 12) + (InsuranceNum / 12) + HOANum;
   
     const PropertyManagentCalc = MonthlyRentNum * (PropertyManagement1Num / 100);
@@ -141,7 +137,8 @@ const TableDisplay: React.FC = () => {
     const MortageCalc = MonthlyPayment;
   
     const CashFlowCalc = MonthlyRentNum - PropertyManagentCalc - MortageCalc;
-  
+    
+    
     setResults({
       totalBudget,
       projectCosts,
@@ -163,7 +160,6 @@ const TableDisplay: React.FC = () => {
       LoanAmountCalc,
       AppraisedValueCalc,
       EquityAmountCalc,
-      LoanAmountDownCalc,
       MonthlyPrincipal,
       MonthlyPayment,
       PropertyManagentCalc,
@@ -177,15 +173,12 @@ const TableDisplay: React.FC = () => {
   }, [purchasePrice, costPerSqFt, sqFootage, finishedValue, salesPropertyPercent, expectedCarry, UtilitiesInsurance, HardmoneyDown, InterestRate, LoanDown, Points, Reserve]);
 
   return (
+    <Header>
+    <div className="p-6">
 
-    <div className="p-6 rounded-xl shadow-md">
-        <h1 className="text-center text-2xl font-semibold text-gray-800 mb-4 font-din">
-          SBTW Proforma
-        </h1>
-    
-        <div className="flex flex-wrap -mx-3">
+        <div className="flex flex-wrap">
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold  text-gray-800 mb-4">Springboard To Wealth Deal Analysis Calculator</h2>
               <table className="w-full border-collapse">
                 <thead>
@@ -225,7 +218,7 @@ const TableDisplay: React.FC = () => {
           </div>
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Results</h2>
               <table className="w-full border-collapse">
                 <tbody>
@@ -249,7 +242,7 @@ const TableDisplay: React.FC = () => {
                     <td className="py-3 px-4 border-b border-gray-200">Sales and Property Costs</td>
                     <td className="py-3 px-4 flex items-center border-b border-gray-200">
                       <span className="font-bold text-gray-700 mr-2">${results.salesPropertyCosts.toFixed(2)}</span>
-                      <input type="text" value={salesPropertyPercent} onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))} className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-16" placeholder="%" />
+                      <input type="text" value={salesPropertyPercent} onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))} className="px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20" placeholder="%" />
                     </td>
                   </tr>
                   <tr>
@@ -265,13 +258,12 @@ const TableDisplay: React.FC = () => {
           </div>
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Carry Costs</h2>
+        <div className="p-6 bg-gray-50 shadow-lg rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Carry Costs</h2>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value (%)</th>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value ($)</th>
                   </tr>
                 </thead>
@@ -281,47 +273,44 @@ const TableDisplay: React.FC = () => {
                     <td className="py-3 px-4 border-b border-gray-200">
                       <input type="text" value={expectedCarry} onChange={(e) => setExpectedCarry(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="months" />
                     </td>
-                    <td className="py-3 px-4 border-b border-gray-200"></td>
+                    
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Utilities/Insurance/Fees (monthly)</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={UtilitiesInsurance} onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                    </td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.utilitesInsuranceCalc.toFixed(2)}</td>
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.utilitesInsuranceCalc.toFixed(2)} <input type="text" value={UtilitiesInsurance} onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money payment</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                      
+                
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.hardMoneyPaymentCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold">Carry Cost Subtotal</td>
-                    <td className="py-3 px-4 border-b border-gray-200"></td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CarryCostSubtotal.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money principal</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                      
+                 
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPrincipalCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money down $</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                      
+                
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardmoneyDownCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money points</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                      
+                
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPointsCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money fees</td>
                     <td className="py-3 px-4 border-b border-gray-200">
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyFeesCalc.toFixed(2)}</td>
                       <input
                         type="text"
                         value={`${Hardmoneyfees}%`}
@@ -331,21 +320,20 @@ const TableDisplay: React.FC = () => {
                             setHardmoneyfees(formatNumber(value)); // Atualiza o estado como número
                           }
                         }}
-                       className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-16"
+                       className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
                         placeholder="%"
                       />
                     </td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyFeesCalc.toFixed(2)}</td>
+                  
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Total Down</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                    
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.TotalDownCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Reserve</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
+                    <td className="py-3 px-4 border-b border-gray-200">                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.ReserveCalc.toFixed(2)}</td>
                       <input
                         type="text"
                         value={`${Reserve}%`}
@@ -355,17 +343,15 @@ const TableDisplay: React.FC = () => {
                             setReserve(formatNumber(value)); // Atualiza como número
                           }
                         }}
-                        className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-16"
+                        className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
                         placeholder="%"
                       />
                     </td>
-
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.ReserveCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold">Cash On Hand</td>
-                    <td className="py-3 px-4 border-b border-gray-200">     
-                    </td>
+                      
+                    
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CashOnHandCalc.toFixed(2)}</td>
                   </tr>
                 </tbody>
@@ -374,7 +360,7 @@ const TableDisplay: React.FC = () => {
           </div>
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Takedown/Hard Money</h2>
               <table className="w-full border-collapse">
                 <thead>
@@ -403,7 +389,7 @@ const TableDisplay: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">TAKEOUT/REFINANCE Mortgage Calculator</h2>
               <table className="w-full border-collapse">
                 <thead>
@@ -461,7 +447,7 @@ const TableDisplay: React.FC = () => {
               </table>
             </div>
 
-            <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">BRRRRR CASH FLOW</h2>
               <table className="w-full border-collapse">
                 <thead>
@@ -497,6 +483,7 @@ const TableDisplay: React.FC = () => {
           </div>
         </div>
       </div>
+      </Header>
   );
 };
 

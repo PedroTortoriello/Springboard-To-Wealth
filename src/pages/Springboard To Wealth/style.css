@@ -1,3 +1,152 @@
-body{
-  font-family: 'DIN', sans-serif;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: DIN, sans-serif;
+  background-color: #f4f5f7;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container principal */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h1 {
+  font-size: 2rem;
+  color: #1a202c;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+th, td {
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #edf2f7;
+  color: #2d3748;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  color: #4a5568;
+}
+
+td input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: #f7fafc;
+  transition: border-color 0.2s;
+}
+
+td input:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+/* Flexbox para responsividade */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.flex-item {
+  flex: 1 1 100%;
+}
+
+@media (min-width: 768px) {
+  .flex-item {
+    flex: 1 1 48%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flex-item {
+    flex: 1 1 30%;
+  }
+}
+
+/* Botões */
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3182ce;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2b6cb0;
+}
+
+button:focus {
+  outline: 2px solid #63b3ed;
+  outline-offset: 2px;
+}
+
+/* Utilitários */
+.shadow-lg {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.rounded-lg {
+  border-radius: 12px;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.text-gray-800 {
+  color: #2d3748;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mb-4 {
+  margin-bottom: 24px;
+}
+
+.p-6 {
+  padding: 24px;
 }
