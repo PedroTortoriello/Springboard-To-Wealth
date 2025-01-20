@@ -1,19 +1,10 @@
 import React, { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
 import Logo from '../images/SBTW1.png'
 
 const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  const toggleType = (type: string) => {
-    setSelectedTypes((prevSelectedTypes) =>
-      prevSelectedTypes.includes(type)
-        ? prevSelectedTypes.filter((t) => t !== type)
-        : [...prevSelectedTypes, type]
-    );
-  };
   return (
     <div className="dark:bg-gray-900 dark:text-gray-200 font-din">
       {/* Toast Notifications */}
