@@ -203,7 +203,7 @@ const TableDisplay: React.FC = () => {
         <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
   <div className="p-6 shadow-lg rounded-lg">
-    <h2 className="text-xl font-semibold text-gray-800 mb-4">Springboard To Wealth Deal Analysis Calculator</h2>
+    <h2 className="text-xl font-semibold text-gray-800 mb-4">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
     <span className="ml-2 text-gray-500 flex items-center">
       <IoIosInformationCircleOutline className="text-sm mr-1" />
       Click to view description
@@ -451,7 +451,7 @@ const TableDisplay: React.FC = () => {
               <Tooltip message="Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value." />
             )}
           </td>
-          <td className="py-1 px-10 items-center">
+          <td className="py-3 px-4 items-center border-b border-gray-200">
             <span className="font-bold text-gray-700 mr-2">
               ${results.salesPropertyCosts.toFixed(2)}
             </span>
@@ -459,7 +459,7 @@ const TableDisplay: React.FC = () => {
               type="text"
               value={salesPropertyPercent}
               onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))}
-              className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-25"
+              className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-15"
               placeholder="%"
             />
           </td>
@@ -506,7 +506,7 @@ const TableDisplay: React.FC = () => {
     
           <div className="w-full md:w-1/2 lg:w-2/5 px-3 mb-6">
         <div className="p-6 bg-gray-50 shadow-lg rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Carry Costs</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Carry Costs</h2>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
@@ -608,7 +608,7 @@ const TableDisplay: React.FC = () => {
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
             <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Takedown/Hard Money</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Takedown/Hard Money</h2>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
@@ -637,7 +637,7 @@ const TableDisplay: React.FC = () => {
               </table>
             </div>
             <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">TAKEOUT/REFINANCE Mortgage Calculator</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">TAKEOUT/REFINANCE Mortgage Calculator</h2>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
@@ -699,7 +699,7 @@ const TableDisplay: React.FC = () => {
             </div>
 
             <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">BRRRRR CASH FLOW</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">BRRRR CASH FLOW</h2>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>

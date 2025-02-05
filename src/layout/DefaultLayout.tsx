@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react'; 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from '../images/SBTW1.png'
+import Logo from '../images/Logo.png'
 
 const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
 
@@ -11,22 +11,20 @@ const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
       <ToastContainer />
 
       {/* Header */}
-
       <header className="bg-gradient-to-r bg-slate-200 text-white shadow-md p-4 flex items-center justify-between">
-
-      <div className="flex justify-center items-center p-6 bg-white rounded-lg shadow-md mt-4">
-        <div className="flex space-x-6">
-          <img src={Logo} alt="" className='h-15 object-contain'/>
+        
+        <div className="flex items-center">
+          <img src={Logo} alt="Logo" className="h-30 max-h-[80px] w-auto object-contain" />
         </div>
-      </div>
-      <a
-              href="https://www.springboard-community.com/home"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-400 transition shadow-md"
-            >
-              Join Circle
-            </a>
+      
+        <a
+          href="https://www.springboard-community.com/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-400 transition shadow-md text-center"
+        >
+          Join Springboard to Wealth
+        </a>
       </header>
 
       {/* Page Content */}
