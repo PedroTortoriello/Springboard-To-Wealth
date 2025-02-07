@@ -206,8 +206,8 @@ const TableDisplay: React.FC = () => {
   <table className="w-full border-collapse font-helvetica" >
     <thead>
       <tr>
-        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 uppercase">Field</th>
-        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 uppercase">Input</th>
+        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 ">Field</th>
+        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 ">Input</th>
       </tr>
     </thead>
     <tbody>
