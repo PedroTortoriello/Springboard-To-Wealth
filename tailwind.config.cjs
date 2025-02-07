@@ -9,7 +9,8 @@ module.exports = {
   		satoshi: [
   			'Satoshi',
   			'sans-serif'
-  		]
+  		],
+			helvetica: ['Helvetica', 'Arial', 'sans-serif'],	
   	},
   	screens: {
   		'2xsm': '375px',

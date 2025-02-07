@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import './style.css';
-import { IoIosInformationCircleOutline } from 'react-icons/io';
 import Header from '@/layout/DefaultLayout';
 const TableDisplay: React.FC = () => {
   const [purchasePrice, setPurchasePrice] = useState("");
@@ -202,153 +201,159 @@ const TableDisplay: React.FC = () => {
 
         <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-  <div className="p-6 shadow-lg rounded-lg">
-    <h2 className="text-xl font-semibold text-gray-800 mb-4">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
-    <span className="ml-2 text-gray-500 flex items-center">
-      <IoIosInformationCircleOutline className="text-sm mr-1" />
-      Click to view description
-    </span>
-    <table className="w-full border-collapse">
-      <thead>
-        <tr>
-          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Field</th>
-          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Input</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Campo 1 */}
-        <tr className="relative">
-          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+        <div className="p-6 shadow-lg rounded-lg py-11">
+  <h2 className="text-xl font-semibold text-gray-800 mb-4">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
+  <table className="w-full border-collapse font-helvetica" >
+    <thead>
+      <tr>
+        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 uppercase">Field</th>
+        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 uppercase">Input</th>
+      </tr>
+    </thead>
+    <tbody>
+      {/* Campo 1 */}
+      <tr className="relative">
+        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              className="ml-2 text-black  flex items-center cursor-pointer"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.purchasePrice ? null : descriptions.purchasePrice
                 )
               }
-            >Purchase Price
+            >
+              Purchase Price
             </span>
-            {selectedDescription === descriptions.purchasePrice && (
-              <Tooltip message={descriptions.purchasePrice} />
-            )}
-          </td>
-          <td className="py-1 px-4 border-b border-gray-200">
-            <input
-              type="text"
-              value={purchasePrice}
-              onChange={(e) => setPurchasePrice(formatNumber(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="$"
-            />
-          </td>
-        </tr>
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.purchasePrice && (
+            <Tooltip message={descriptions.purchasePrice} />
+          )}
+        </td>
+        <td className="py-1 px-4 border-b border-gray-200">
+          <input
+            type="text"
+            value={purchasePrice}
+            onChange={(e) => setPurchasePrice(formatNumber(e.target.value))}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="$"
+          />
+        </td>
+      </tr>
 
-        {/* Campo 2 */}
-        <tr className="relative">
-          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-           
+      {/* Campo 2 */}
+      <tr className="relative">
+        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              className="ml-2 text-black  flex items-center cursor-pointer"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.costPerSqFt ? null : descriptions.costPerSqFt
                 )
               }
-            > 
-            Construction costs per sq ft
+            >
+              Construction costs per sq ft
             </span>
-            {selectedDescription === descriptions.costPerSqFt && (
-              <Tooltip message={descriptions.costPerSqFt} />
-            )}
-          </td>
-          <td className="py-1 px-4 border-b border-gray-200">
-            <input
-              type="text"
-              value={costPerSqFt}
-              onChange={(e) => setCostPerSqFt(formatNumber(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="$"
-            />
-          </td>
-        </tr>
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.costPerSqFt && (
+            <Tooltip message={descriptions.costPerSqFt} />
+          )}
+        </td>
+        <td className="py-1 px-4 border-b border-gray-200">
+          <input
+            type="text"
+            value={costPerSqFt}
+            onChange={(e) => setCostPerSqFt(formatNumber(e.target.value))}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="$"
+          />
+        </td>
+      </tr>
 
-        {/* Campo 3 */}
-        <tr className="relative">
-          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-            
+      {/* Campo 3 */}
+      <tr className="relative">
+        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              className="ml-2 text-black  flex items-center cursor-pointer"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.sqFootage ? null : descriptions.sqFootage
                 )
               }
             >
-            Total building Sq footage (ft)
+              Total building Sq footage (ft)
             </span>
-            {selectedDescription === descriptions.sqFootage && (
-              <Tooltip message={descriptions.sqFootage} />
-            )}
-          </td>
-          <td className="py-1 px-4 border-b border-gray-200">
-            <input
-              type="text"
-              value={sqFootage}
-              onChange={(e) => setSqFootage(formatNumber(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="ft"
-            />
-          </td>
-        </tr>
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.sqFootage && (
+            <Tooltip message={descriptions.sqFootage} />
+          )}
+        </td>
+        <td className="py-1 px-4 border-b border-gray-200">
+          <input
+            type="text"
+            value={sqFootage}
+            onChange={(e) => setSqFootage(formatNumber(e.target.value))}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="ft"
+          />
+        </td>
+      </tr>
 
-        {/* Campo 4 */}
-        <tr className="relative">
-          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-            
+      {/* Campo 4 */}
+      <tr className="relative">
+        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="ml-2 text-blue-500 flex items-center cursor-pointer"
+              className="ml-2 text-black  flex items-center cursor-pointer"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.finishedValue ? null : descriptions.finishedValue
                 )
               }
             >
-            Finished Value of Project
+              Finished Value of Project
             </span>
-            {selectedDescription === descriptions.finishedValue && (
-              <Tooltip message={descriptions.finishedValue} />
-            )}
-          </td>
-          <td className="py-1 px-4 border-b border-gray-200">
-            <input
-              type="text"
-              value={finishedValue}
-              onChange={(e) => setFinishedValue(formatNumber(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="$"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.finishedValue && (
+            <Tooltip message={descriptions.finishedValue} />
+          )}
+        </td>
+        <td className="py-1 px-4 border-b border-gray-200">
+          <input
+            type="text"
+            value={finishedValue}
+            onChange={(e) => setFinishedValue(formatNumber(e.target.value))}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="$"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 </div>
 
     
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-  <div className="p-6 shadow-lg rounded-lg">
-    <h2 className="text-xl font-semibold text-gray-800 mb-4">Results</h2>
-    <span className="ml-2 text-gray-500 flex items-center">
-      <IoIosInformationCircleOutline className="text-sm mr-1" />
-      Click to view description
-    </span>
+<div className="p-6 shadow-lg rounded-lg">
+  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Results</h2>
 
-    <table className="w-full border-collapse">
-      <tbody>
-        <tr className="relative">
-          <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+  <table className="w-full border-collapse font-helvetica">
+    <tbody>
+      {/* Total Construction Budget */}
+      <tr className="relative">
+        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.totalBudget
@@ -359,18 +364,23 @@ const TableDisplay: React.FC = () => {
             >
               Total Construction Budget
             </span>
-            {selectedDescription === descriptions.totalBudget && (
-              <Tooltip message={descriptions.totalBudget} />
-            )}
-          </td>
-          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-            ${results.totalBudget.toFixed(2)}
-          </td>
-        </tr>
-        <tr className="relative">
-          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.totalBudget && (
+            <Tooltip message={descriptions.totalBudget} />
+          )}
+        </td>
+        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+          ${results.totalBudget.toFixed(2)}
+        </td>
+      </tr>
+
+      {/* Project Costs */}
+      <tr className="relative">
+        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.projectCosts
@@ -381,18 +391,23 @@ const TableDisplay: React.FC = () => {
             >
               Project Costs
             </span>
-            {selectedDescription === descriptions.projectCosts && (
-              <Tooltip message={descriptions.projectCosts} />
-            )}
-          </td>
-          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-            ${results.projectCosts.toFixed(2)}
-          </td>
-        </tr>
-        <tr className="relative">
-          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.projectCosts && (
+            <Tooltip message={descriptions.projectCosts} />
+          )}
+        </td>
+        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+          ${results.projectCosts.toFixed(2)}
+        </td>
+      </tr>
+
+      {/* Land Cost as a % of Finished Value */}
+      <tr className="relative">
+        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.landCostPercent
@@ -403,18 +418,23 @@ const TableDisplay: React.FC = () => {
             >
               Land Cost as a % of Finished Value
             </span>
-            {selectedDescription === descriptions.landCostPercent && (
-              <Tooltip message="The percentage of the land cost relative to the finished project value (ARV)." />
-            )}
-          </td>
-          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-            {results.landCostPercent.toFixed(2)}%
-          </td>
-        </tr>
-        <tr className="relative">
-          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.landCostPercent && (
+            <Tooltip message="The percentage of the land cost relative to the finished project value (ARV)." />
+          )}
+        </td>
+        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+          {results.landCostPercent.toFixed(2)}%
+        </td>
+      </tr>
+
+      {/* Combined Cost as a % of Finished Value */}
+      <tr className="relative">
+        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.combinedCostPercent
@@ -425,18 +445,23 @@ const TableDisplay: React.FC = () => {
             >
               Combined Cost as a % of Finished Value
             </span>
-            {selectedDescription === descriptions.combinedCostPercent && (
-              <Tooltip message="The total costs, including land and construction, as a percentage of the finished value of the project." />
-            )}
-          </td>
-          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-            {results.combinedCostPercent.toFixed(2)}%
-          </td>
-        </tr>
-        <tr className="relative">
-          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.combinedCostPercent && (
+            <Tooltip message="The total costs, including land and construction, as a percentage of the finished value of the project." />
+          )}
+        </td>
+        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+          {results.combinedCostPercent.toFixed(2)}%
+        </td>
+      </tr>
+
+      {/* Sales and Property Costs */}
+      <tr className="relative">
+        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.salesPropertyCosts
@@ -447,27 +472,32 @@ const TableDisplay: React.FC = () => {
             >
               Sales and Property Costs
             </span>
-            {selectedDescription === descriptions.salesPropertyCosts && (
-              <Tooltip message="Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value." />
-            )}
-          </td>
-          <td className="py-3 px-4 items-center border-b border-gray-200">
-            <span className="font-bold text-gray-700 mr-2">
-              ${results.salesPropertyCosts.toFixed(2)}
-            </span>
-            <input
-              type="text"
-              value={salesPropertyPercent}
-              onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))}
-              className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-15"
-              placeholder="%"
-            />
-          </td>
-        </tr>
-        <tr className="relative">
-          <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.salesPropertyCosts && (
+            <Tooltip message="Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value." />
+          )}
+        </td>
+        <td className="py-1 px-4 items-center border-b border-gray-200">
+          <span className="font-bold text-gray-700 mr-2">
+            ${results.salesPropertyCosts.toFixed(2)}
+          </span>
+          <input
+            type="text"
+            value={salesPropertyPercent}
+            onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))}
+            className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-15"
+            placeholder="%"
+          />
+        </td>
+      </tr>
+
+      {/* Potential Profit */}
+      <tr className="relative">
+        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
+          <div className="flex flex-col">
             <span
-              className="cursor-pointer text-blue-500"
+              className="cursor-pointer text-black font-semibold flex items-center"
               onClick={() =>
                 setSelectedDescription(
                   selectedDescription === descriptions.potentialProfit
@@ -478,36 +508,38 @@ const TableDisplay: React.FC = () => {
             >
               Potential Profit
             </span>
-            {selectedDescription === descriptions.potentialProfit && (
-              <Tooltip message="Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit." />
-            )}
-          </td>
-          <td className="py-3 px-4 items-center border-b border-gray-200">
-            <span className="font-bold text-gray-700 mr-2">
-              ${results.potentialProfit.toFixed(2)}
-            </span>
-            <span
-  className={`px-3 py-2 rounded-md text-white ${
-    (results.potentialProfitPercent < 15 || isNaN(results.potentialProfitPercent))
-      ? 'bg-red-500'
-      : 'bg-[#44C63A]'
-  }`}
->
-  {(isNaN(results.potentialProfitPercent) ? 0 : results.potentialProfitPercent).toFixed(2)}%
-</span>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+          </div>
+          {selectedDescription === descriptions.potentialProfit && (
+            <Tooltip message="Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit." />
+          )}
+        </td>
+        <td className="py-3 px-4 items-center border-b border-gray-200">
+          <span className="font-bold text-gray-700 mr-2">
+            ${results.potentialProfit.toFixed(2)}
+          </span>
+          <span
+            className={`px-3 py-2 rounded-md text-white ${
+              results.potentialProfitPercent < 15 || isNaN(results.potentialProfitPercent)
+                ? 'bg-red-500'
+                : 'bg-[#44C63A]'
+            }`}
+          >
+            {(isNaN(results.potentialProfitPercent) ? 0 : results.potentialProfitPercent).toFixed(2)}%
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
+          </div>
+
     
-          <div className="w-full md:w-1/2 lg:w-2/5 px-3 mb-6">
-        <div className="p-6 bg-gray-50 shadow-lg rounded-lg">
+          <div className="w-full md:w-full lg:w-1/2 px-3 mb-6 ">
+        <div className="p-6 shadow-lg rounded-lg">
           <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Carry Costs</h2>
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse font-helvetica">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
@@ -518,13 +550,13 @@ const TableDisplay: React.FC = () => {
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Expected Carry (months)</td>
                     <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={expectedCarry} onChange={(e) => setExpectedCarry(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="months" />
+                      <input type="text" value={expectedCarry} onChange={(e) => setExpectedCarry(formatNumber(e.target.value))} className="w-30 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="months" />
                     </td>
                     
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Utilities/Insurance/Fees (monthly)</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.utilitesInsuranceCalc.toFixed(2)} <input type="text" value={UtilitiesInsurance} onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.utilitesInsuranceCalc.toFixed(2)} <input type="text" value={UtilitiesInsurance} onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money payment</td>
@@ -556,9 +588,8 @@ const TableDisplay: React.FC = () => {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Hard money fees</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyFeesCalc.toFixed(2)}</td>
-                      <input
+               
+                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyFeesCalc.toFixed(2)}           <input
                         type="text"
                         value={`${Hardmoneyfees}%`}
                         onChange={(e) => {
@@ -567,10 +598,12 @@ const TableDisplay: React.FC = () => {
                             setHardmoneyfees(formatNumber(value)); // Atualiza o estado como número
                           }
                         }}
-                       className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
+                       className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="%"
-                      />
-                    </td>
+                      /></td>
+                    
+           
+                 
                   
                   </tr>
                   <tr>
@@ -580,8 +613,7 @@ const TableDisplay: React.FC = () => {
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200">Reserve</td>
-                    <td className="py-3 px-4 border-b border-gray-200">                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.ReserveCalc.toFixed(2)}</td>
-                      <input
+               <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.ReserveCalc.toFixed(2)}      <input
                         type="text"
                         value={`${Reserve}%`}
                         onChange={(e) => {
@@ -590,10 +622,11 @@ const TableDisplay: React.FC = () => {
                             setReserve(formatNumber(value)); // Atualiza como número
                           }
                         }}
-                        className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
+                        className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="%"
-                      />
-                    </td>
+                      /></td>
+                
+                   
                   </tr>
                   <tr>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold">Cash On Hand</td>
@@ -609,7 +642,7 @@ const TableDisplay: React.FC = () => {
           <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
             <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Takedown/Hard Money</h2>
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse font-helvetica">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
@@ -638,7 +671,7 @@ const TableDisplay: React.FC = () => {
             </div>
             <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">TAKEOUT/REFINANCE Mortgage Calculator</h2>
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse font-helvetica">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
@@ -700,7 +733,7 @@ const TableDisplay: React.FC = () => {
 
             <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">BRRRR CASH FLOW</h2>
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse font-helvetica">
                 <thead>
                   <tr>
                     <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
