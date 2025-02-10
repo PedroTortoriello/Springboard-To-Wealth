@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import Header from '@/layout/DefaultLayout';
 const TableDisplay: React.FC = () => {
+  const [selectedTable, setSelectedTable] = useState("");
   const [purchasePrice, setPurchasePrice] = useState("");
   const [costPerSqFt, setCostPerSqFt] = useState("");
   const [sqFootage, setSqFootage] = useState("");
   const [finishedValue, setFinishedValue] = useState("");
-  const [salesPropertyPercent, setSalesPropertyPercent] = useState("");
+  const [salesPropertyPercent, ] = useState("");
   const [expectedCarry, setExpectedCarry] = useState("");
   const [UtilitiesInsurance, setUtilitiesInsurance] = useState("");
   const [HardmoneyDown] = useState("");
@@ -197,478 +198,280 @@ const TableDisplay: React.FC = () => {
 
   return (
     <Header>
-    <div className="p-6">
-
-        <div className="flex flex-wrap">
-        <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-        <div className="p-6 shadow-lg rounded-lg py-11">
-  <h2 className="text-xl font-semibold text-gray-800 mb-4">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
-  <table className="w-full border-collapse font-helvetica" >
-    <thead>
-      <tr>
-        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 ">Field</th>
-        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 ">Input</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* Campo 1 */}
-      <tr className="relative">
-        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="ml-2 text-black  flex items-center cursor-pointer"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.purchasePrice ? null : descriptions.purchasePrice
-                )
-              }
-            >
-              Purchase Price
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.purchasePrice && (
-            <Tooltip message={descriptions.purchasePrice} />
-          )}
-        </td>
-        <td className="py-1 px-4 border-b border-gray-200">
-          <input
-            type="text"
-            value={purchasePrice}
-            onChange={(e) => setPurchasePrice(formatNumber(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="$"
-          />
-        </td>
-      </tr>
-
-      {/* Campo 2 */}
-      <tr className="relative">
-        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="ml-2 text-black  flex items-center cursor-pointer"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.costPerSqFt ? null : descriptions.costPerSqFt
-                )
-              }
-            >
-              Construction costs per sq ft
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.costPerSqFt && (
-            <Tooltip message={descriptions.costPerSqFt} />
-          )}
-        </td>
-        <td className="py-1 px-4 border-b border-gray-200">
-          <input
-            type="text"
-            value={costPerSqFt}
-            onChange={(e) => setCostPerSqFt(formatNumber(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="$"
-          />
-        </td>
-      </tr>
-
-      {/* Campo 3 */}
-      <tr className="relative">
-        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="ml-2 text-black  flex items-center cursor-pointer"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.sqFootage ? null : descriptions.sqFootage
-                )
-              }
-            >
-              Total building Sq footage (ft)
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.sqFootage && (
-            <Tooltip message={descriptions.sqFootage} />
-          )}
-        </td>
-        <td className="py-1 px-4 border-b border-gray-200">
-          <input
-            type="text"
-            value={sqFootage}
-            onChange={(e) => setSqFootage(formatNumber(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="ft"
-          />
-        </td>
-      </tr>
-
-      {/* Campo 4 */}
-      <tr className="relative">
-        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="ml-2 text-black  flex items-center cursor-pointer"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.finishedValue ? null : descriptions.finishedValue
-                )
-              }
-            >
-              Finished Value of Project
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.finishedValue && (
-            <Tooltip message={descriptions.finishedValue} />
-          )}
-        </td>
-        <td className="py-1 px-4 border-b border-gray-200">
-          <input
-            type="text"
-            value={finishedValue}
-            onChange={(e) => setFinishedValue(formatNumber(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="$"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-</div>
-
-    
-          <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-<div className="p-6 shadow-lg rounded-lg">
-  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Results</h2>
-
-  <table className="w-full border-collapse font-helvetica">
-    <tbody>
-      {/* Total Construction Budget */}
-      <tr className="relative">
-        <td className="py-5 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.totalBudget
-                    ? null
-                    : descriptions.totalBudget
-                )
-              }
-            >
-              Total Construction Budget
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.totalBudget && (
-            <Tooltip message={descriptions.totalBudget} />
-          )}
-        </td>
-        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-          ${results.totalBudget.toFixed(2)}
-        </td>
-      </tr>
-
-      {/* Project Costs */}
-      <tr className="relative">
-        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.projectCosts
-                    ? null
-                    : descriptions.projectCosts
-                )
-              }
-            >
-              Project Costs
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.projectCosts && (
-            <Tooltip message={descriptions.projectCosts} />
-          )}
-        </td>
-        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-          ${results.projectCosts.toFixed(2)}
-        </td>
-      </tr>
-
-      {/* Land Cost as a % of Finished Value */}
-      <tr className="relative">
-        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.landCostPercent
-                    ? null
-                    : descriptions.landCostPercent
-                )
-              }
-            >
-              Land Cost as a % of Finished Value
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.landCostPercent && (
-            <Tooltip message="The percentage of the land cost relative to the finished project value (ARV)." />
-          )}
-        </td>
-        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-          {results.landCostPercent.toFixed(2)}%
-        </td>
-      </tr>
-
-      {/* Combined Cost as a % of Finished Value */}
-      <tr className="relative">
-        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.combinedCostPercent
-                    ? null
-                    : descriptions.combinedCostPercent
-                )
-              }
-            >
-              Combined Cost as a % of Finished Value
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.combinedCostPercent && (
-            <Tooltip message="The total costs, including land and construction, as a percentage of the finished value of the project." />
-          )}
-        </td>
-        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
-          {results.combinedCostPercent.toFixed(2)}%
-        </td>
-      </tr>
-
-      {/* Sales and Property Costs */}
-      <tr className="relative">
-        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.salesPropertyCosts
-                    ? null
-                    : descriptions.salesPropertyCosts
-                )
-              }
-            >
-              Sales and Property Costs
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.salesPropertyCosts && (
-            <Tooltip message="Includes agent fees (6%) and closing costs (2%). Typically, 8% of the total finished value." />
-          )}
-        </td>
-        <td className="py-1 px-4 items-center border-b border-gray-200">
-          <span className="font-bold text-gray-700 mr-2">
-            ${results.salesPropertyCosts.toFixed(2)}
-          </span>
-          <input
-            type="text"
-            value={salesPropertyPercent}
-            onChange={(e) => setSalesPropertyPercent(formatNumber(e.target.value))}
-            className="px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-15"
-            placeholder="%"
-          />
-        </td>
-      </tr>
-
-      {/* Potential Profit */}
-      <tr className="relative">
-        <td className="py-3 px-4 border-b border-gray-200 flex items-center">
-          <div className="flex flex-col">
-            <span
-              className="cursor-pointer text-black font-semibold flex items-center"
-              onClick={() =>
-                setSelectedDescription(
-                  selectedDescription === descriptions.potentialProfit
-                    ? null
-                    : descriptions.potentialProfit
-                )
-              }
-            >
-              Potential Profit
-            </span>
-            <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
-          </div>
-          {selectedDescription === descriptions.potentialProfit && (
-            <Tooltip message="Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit." />
-          )}
-        </td>
-        <td className="py-3 px-4 items-center border-b border-gray-200">
-          <span className="font-bold text-gray-700 mr-2">
-            ${results.potentialProfit.toFixed(2)}
-          </span>
-          <span
-            className={`px-3 py-2 rounded-md text-white ${
-              results.potentialProfitPercent < 15 || isNaN(results.potentialProfitPercent)
-                ? 'bg-red-500'
-                : 'bg-[#44C63A]'
-            }`}
+      <div className="p-6">
+        <div className="mb-6 flex flex-wrap space-x-4 justify-center sm:space-x-2">
+          <button
+            onClick={() => setSelectedTable("dealAnalysis")}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
-            {(isNaN(results.potentialProfitPercent) ? 0 : results.potentialProfitPercent).toFixed(2)}%
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-          </div>
-
-    
-          <div className="w-full md:w-full lg:w-1/2 px-3 mb-6 ">
-        <div className="p-6 shadow-lg rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Carry Costs</h2>
-              <table className="w-full border-collapse font-helvetica">
-                <thead>
-                  <tr>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value ($)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Expected Carry (months)</td>
-                    <td className="py-3 px-4 border-b border-gray-200">
-                      <input type="text" value={expectedCarry} onChange={(e) => setExpectedCarry(formatNumber(e.target.value))} className="w-30 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="months" />
-                    </td>
-                    
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Utilities/Insurance/Fees (monthly)</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.utilitesInsuranceCalc.toFixed(2)} <input type="text" value={UtilitiesInsurance} onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Hard money payment</td>
-                      
-                
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.hardMoneyPaymentCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold">Carry Cost Subtotal</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CarryCostSubtotal.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Hard money principal</td>
-                      
-                 
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPrincipalCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Hard money down $</td>
-                      
-                
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardmoneyDownCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Hard money points</td>
-                      
-                
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPointsCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Hard money fees</td>
-               
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyFeesCalc.toFixed(2)}           <input
-                        type="text"
-                        value={`${Hardmoneyfees}%`}
-                        onChange={(e) => {
-                          const value = e.target.value.replace('%', '').trim(); // Remove '%' antes de atualizar
-                          if (!isNaN(parseFloat(value)) && value !== '') {
-                            setHardmoneyfees(formatNumber(value)); // Atualiza o estado como número
-                          }
-                        }}
-                       className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="%"
-                      /></td>
-                    
-           
-                 
-                  
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Total Down</td>
-                    
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.TotalDownCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Reserve</td>
-               <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.ReserveCalc.toFixed(2)}      <input
-                        type="text"
-                        value={`${Reserve}%`}
-                        onChange={(e) => {
-                          const value = e.target.value.replace('%', '').trim(); // Remove '%' antes de atualizar
-                          if (!isNaN(parseFloat(value)) && value !== '') {
-                            setReserve(formatNumber(value)); // Atualiza como número
-                          }
-                        }}
-                        className="w-30 ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="%"
-                      /></td>
-                
-                   
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold">Cash On Hand</td>
-                      
-                    
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CashOnHandCalc.toFixed(2)}</td>
-                  </tr>
-                </tbody>
-              </table>
+            Deal Analysis
+          </button>
+          <button
+            onClick={() => setSelectedTable("carryCosts")}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+          >
+            Carry Costs
+          </button>
+          <button
+            onClick={() => setSelectedTable("hardMoney")}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+          >
+            Takedown/Hard Money
+          </button>
+          <button
+            onClick={() => setSelectedTable("TAKEOUT/REFINANCE Mortgage Calculator")}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+          >
+            TAKEOUT/REFINANCE Mortgage Calculator
+          </button>
+          <button
+            onClick={() => setSelectedTable("BRRRR")}
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+          >
+            BRRRR CASH FLOW
+          </button>
+        </div>
+  
+        <div className="flex flex-wrap">
+          {selectedTable === "dealAnalysis" && (
+            <div className="flex flex-wrap">
+              <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
+                <div className="p-6 shadow-lg rounded-lg">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
+  
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse font-helvetica min-w-[600px]">
+                      <thead>
+                        <tr>
+                          <th className="py-3 px-4 border-b border-gray-200 text-left">Description</th>
+                          <th className="py-3 px-4 border-b border-gray-200 text-left">Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { label: "Purchase Price", value: purchasePrice, description: descriptions.purchasePrice, setter: setPurchasePrice },
+                          { label: "Construction costs per sq ft", value: costPerSqFt, description: descriptions.costPerSqFt, setter: setCostPerSqFt },
+                          { label: "Total building Sq footage (ft)", value: sqFootage, description: descriptions.sqFootage, setter: setSqFootage },
+                          { label: "Finished Value of Project", value: finishedValue, description: descriptions.finishedValue, setter: setFinishedValue }
+                        ].map(({ label, value, description, setter }) => (
+                          <tr key={label} className="relative">
+                            <td className="py-3 px-4 border-b border-gray-200 flex items-center min-w-[250px]">
+                              <div className="flex flex-col">
+                                <span
+                                  className="ml-2 text-black flex items-center cursor-pointer"
+                                  onClick={() =>
+                                    setSelectedDescription(selectedDescription === description ? null : description)
+                                  }
+                                >
+                                  {label}
+                                </span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+                              </div>
+                              {selectedDescription === description && <Tooltip message={description} />}
+                            </td>
+                            <td className="py-3 px-4 border-b border-gray-200">
+                              <input
+                                type="text"
+                                value={value}
+                                onChange={(e) => setter(formatNumber(e.target.value))}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="$"
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+  
+              <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
+                <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Results</h2>
+  
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse font-helvetica min-w-[600px]">
+                      <thead>
+                        <tr>
+                          <th className="py-3 px-4 border-b border-gray-200 text-left">Description</th>
+                          <th className="py-3 px-4 border-b border-gray-200 text-left">Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { label: "Total Construction Budget", value: results.totalBudget, description: descriptions.totalBudget },
+                          { label: "Project Costs", value: results.projectCosts, description: descriptions.projectCosts },
+                          { label: "Land Cost as a % of Finished Value", value: `${results.landCostPercent.toFixed(2)}%`, description: descriptions.landCostPercent },
+                          { label: "Combined Cost as a % of Finished Value", value: `${results.combinedCostPercent.toFixed(2)}%`, description: descriptions.combinedCostPercent },
+                          { label: "Sales and Property Costs", value: `$${results.salesPropertyCosts.toFixed(2)}`, description: descriptions.salesPropertyCosts },
+                          { label: "Potential Profit", value: `$${results.potentialProfit.toFixed(2)}`, description: descriptions.potentialProfit }
+                        ].map(({ label, value, description }) => (
+                          <tr key={label} className="relative">
+                            <td className="py-3 px-4 border-b border-gray-200 flex items-center min-w-[250px]">
+                              <div className="flex flex-col">
+                                <span
+                                  className="ml-2 text-black flex items-center cursor-pointer"
+                                  onClick={() =>
+                                    setSelectedDescription(selectedDescription === description ? null : description)
+                                  }
+                                >
+                                  {label}
+                                </span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+                              </div>
+                              {selectedDescription === description && <Tooltip message={description} />}
+                            </td>
+                            <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700 min-w-[150px]">
+                              {value}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-    
-          <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-            <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Takedown/Hard Money</h2>
-              <table className="w-full border-collapse font-helvetica">
-                <thead>
-                  <tr>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Interest Rate (%)</td>
-                    <input type="text" value={InterestRate} onChange={(e) => setInterestRate(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Loan Amount</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.LoanAmountCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Loan Down (%)</td>
-                    <input type="text" value={LoanDown} onChange={(e) => setLoanDown(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Points</td>
-                    <input type="text" value={Points} onChange={(e) => setPoints(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                  </tr>
-                </tbody>
-              </table>
+          )}
+  
+          {selectedTable === "carryCosts" && (
+            <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
+              <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Carry Costs</h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse font-helvetica min-w-[400px]">
+                    <thead>
+                      <tr>
+                        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
+                        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value ($)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Expected Carry (months)</td>
+                        <td className="py-3 px-4 border-b border-gray-200">
+                          <input type="text" value={expectedCarry} onChange={(e) => setExpectedCarry(formatNumber(e.target.value))} className="w-20 px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="months" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Utilities/Insurance/Fees (monthly)</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+                          ${results.utilitesInsuranceCalc.toFixed(2)}
+                          <input 
+                            type="text" 
+                            value={UtilitiesInsurance} 
+                            onChange={(e) => setUtilitiesInsurance(formatNumber(e.target.value))} 
+                            className="w-20 px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ml-2" 
+                            placeholder="$" 
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Hard money payment</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.hardMoneyPaymentCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Carry Cost Subtotal</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CarryCostSubtotal.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Hard money principal</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPrincipalCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Hard money down $</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardmoneyDownCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Hard money points</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.HardMoneyPointsCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Hard money fees</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+                          ${results.HardMoneyFeesCalc.toFixed(2)}
+                          <input type="text" 
+                            value={`${Hardmoneyfees}%`} 
+                            onChange={(e) => { 
+                              const value = e.target.value.replace('%', '').trim(); 
+                              if (!isNaN(parseFloat(value)) && value !== '') { 
+                                setHardmoneyfees(formatNumber(value)); 
+                              } 
+                            }} 
+                            className="w-20 ml-2 px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            placeholder="%" 
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Total Down</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.TotalDownCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Reserve</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
+                          ${results.ReserveCalc.toFixed(2)}
+                          <input type="text" 
+                            value={`${Reserve}%`} 
+                            onChange={(e) => { 
+                              const value = e.target.value.replace('%', '').trim(); 
+                              if (!isNaN(parseFloat(value)) && value !== '') { 
+                                setReserve(formatNumber(value)); 
+                              } 
+                            }} 
+                            className="w-20 ml-2 px-3 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            placeholder="%" 
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Cash On Hand</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CashOnHandCalc.toFixed(2)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
+          )}
+  
+          {selectedTable === "hardMoney" && (
+            <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
+              <div className="p-6 shadow-lg rounded-lg">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Takedown/Hard Money</h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse font-helvetica">
+                    <thead>
+                      <tr>
+                        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
+                        <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black">Interest Rate (%)</td>
+                        <td className="py-1 px-4 "><input type="text" value={InterestRate} onChange={(e) => setInterestRate(formatNumber(e.target.value))} className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>   
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black">Loan Amount</td>
+                        <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.LoanAmountCalc.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black">Loan Down (%)</td>
+                        <td className="py-1 px-4 "> <input type="text" value={LoanDown} onChange={(e) => setLoanDown(formatNumber(e.target.value))} className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 border-b border-gray-200 text-black">Points</td>
+                        <td className="py-1 px-4 "><input type="text" value={Points} onChange={(e) => setPoints(formatNumber(e.target.value))} className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+            {selectedTable === "TAKEOUT/REFINANCE Mortgage Calculator" && (
             <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">TAKEOUT/REFINANCE Mortgage Calculator</h2>
               <table className="w-full border-collapse font-helvetica">
@@ -680,49 +483,50 @@ const TableDisplay: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Appraised Value/ARV</td>
+                    <td className="py-3 px-4 border-b border-gray-200  text-black">Appraised Value/ARV</td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.AppraisedValueCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Equity %</td>
-                    <input type="text" value={Equity} onChange={(e) => setEquity(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Equity %</td>
+                    <td className="py-1 px-4 ">                    <input type="text" value={Equity} onChange={(e) => setEquity(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td>   
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Equity Amount/Down</td>
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Equity Amount/Down</td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.EquityAmountCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Loan Amount</td>
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Loan Amount</td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.LoanAmountCalc.toFixed(2)}</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Loan TERM (Years)</td>
-                    <input type="text" value={LoanTerm} onChange={(e) => setLoanTerm(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Loan TERM (Years)</td>
+                    <td className="py-1 px-4 ">                    <input type="text" value={LoanTerm} onChange={(e) => setLoanTerm(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">INTEREST RATE (%)</td>
-                    <input type="text" value={InterestRate2} onChange={(e) => setInterestRate2(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">INTEREST RATE (%)</td>
+                    <td className="py-1 px-4 ">                    <input type="text" value={InterestRate2} onChange={(e) => setInterestRate2(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Monthly Principal + Interest</td>
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Monthly Principal + Interest</td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
                       ${isNaN(results.MonthlyPrincipal) ? 0 : results.MonthlyPrincipal.toFixed(2)}
                     </td>
+
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">TAX (Annual)</td>
-                    <input type="text" value={TaxAnual} onChange={(e) => setTaxAnual(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">TAX (Annual)</td>
+                    <td className="py-1 px-4 ">  <input type="text" value={TaxAnual} onChange={(e) => setTaxAnual(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">INSURANCE (Annual)</td>
-                    <input type="text" value={Insurance} onChange={(e) => setInsurance(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">INSURANCE (Annual)</td>
+                    <td className="py-1 px-4 ">              <input type="text" value={Insurance} onChange={(e) => setInsurance(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">HOA (Monthly)</td>
-                    <input type="text" value={HOA} onChange={(e) => setHOA(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">HOA (Monthly)</td>
+                    <td className="py-1 px-4 "> <input type="text" value={HOA} onChange={(e) => setHOA(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Monthly Payment (PITI)</td>
+                    <td className="py-3 px-4 border-b border-gray-200 text-black">Monthly Payment (PITI)</td>
                     <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">
                       ${isNaN(results.MonthlyPayment) ? 0 : results.MonthlyPayment.toFixed(2)}
                     </td>
@@ -730,43 +534,47 @@ const TableDisplay: React.FC = () => {
                 </tbody>
               </table>
             </div>
-
-            <div className="p-6 shadow-lg rounded-lg">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">BRRRR CASH FLOW</h2>
-              <table className="w-full border-collapse font-helvetica">
-                <thead>
-                  <tr>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Description</th>
-                    <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Monthly Rent</td>
-                    <input type="text" value={MonthlyRent} onChange={(e) => setMonthlyRent(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Property management % (usually 8-10%)</td>
-                    <input type="text" value={PropertyManagement1} onChange={(e) => setPropertyManagement1(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" />
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Property Management Fees</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.PropertyManagentCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">Mortgage Payment</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.MortageCalc.toFixed(2)}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b border-gray-200">CASH FLOW</td>
-                    <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CashFlowCalc.toFixed(2)}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            )}
+            {selectedTable === "BRRRR" && (
+            <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
+  <h2 className="text-xl font-semibold text-black mb-4">BRRRR CASH FLOW</h2>
+  <div className="overflow-x-auto">
+    <table className="w-full border-collapse font-helvetica min-w-[400px]">
+      <thead>
+        <tr>
+          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 whitespace-nowrap">Description</th>
+          <th className="text-left py-3 px-4 bg-gray-100 font-bold border-b border-gray-200 whitespace-nowrap">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Monthly Rent</td>
+          <td className="py-1 px-4"><input type="text" value={MonthlyRent} onChange={(e) => setMonthlyRent(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
+        </tr>
+        <tr>
+          <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Property management % (usually 8-10%)</td>
+          <td className="py-1 px-4"><input type="text" value={PropertyManagement1} onChange={(e) => setPropertyManagement1(formatNumber(e.target.value))} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="$" /></td> 
+        </tr>
+        <tr>
+          <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Property Management Fees</td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.PropertyManagentCalc.toFixed(2)}</td>
+        </tr>
+        <tr>
+          <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">Mortgage Payment</td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.MortageCalc.toFixed(2)}</td>
+        </tr>
+        <tr>
+          <td className="py-3 px-4 border-b border-gray-200 text-black whitespace-nowrap">CASH FLOW</td>
+          <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700">${results.CashFlowCalc.toFixed(2)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            )}
           </div>
         </div>
-      </div>
+      
       </Header>
   );
 };
