@@ -234,13 +234,13 @@ const TableDisplay: React.FC = () => {
   
         <div className="flex flex-wrap">
           {selectedTable === "dealAnalysis" && (
-            <div className="flex flex-wrap">
-              <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
-                <div className="p-6 shadow-lg rounded-lg">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">SPRINGBOARD TO WEALTH DEAL ANALYSIS CALCULATOR</h2>
+
+            <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
+              <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">DEAL ANALYSIS CALCULATOR</h2>
   
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse font-helvetica min-w-[600px]">
+                    <table className="w-full border-collapse font-helvetica min-w-[400px]">
                       <thead>
                         <tr>
                           <th className="py-3 px-4 border-b border-gray-200 text-left">Description</th>
@@ -284,14 +284,14 @@ const TableDisplay: React.FC = () => {
                     </table>
                   </div>
                 </div>
-              </div>
+             
   
-              <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
+              <div className="md:max-w-[600px] lg:w-full px-3 mb-6">
                 <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
                   <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Results</h2>
   
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse font-helvetica min-w-[600px]">
+                    <table className="w-full border-collapse font-helvetica max-w-[600px]">
                       <thead>
                         <tr>
                           <th className="py-3 px-4 border-b border-gray-200 text-left">Description</th>
