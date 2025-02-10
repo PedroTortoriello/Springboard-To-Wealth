@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import Header from '@/layout/DefaultLayout';
 const TableDisplay: React.FC = () => {
-  const [selectedTable, setSelectedTable] = useState("");
+  const [selectedTable, setSelectedTable] = useState("dealAnalysis");
   const [purchasePrice, setPurchasePrice] = useState("");
   const [costPerSqFt, setCostPerSqFt] = useState("");
   const [sqFootage, setSqFootage] = useState("");
@@ -202,37 +202,38 @@ const TableDisplay: React.FC = () => {
         <div className="mb-6 flex flex-wrap space-x-4 justify-center sm:space-x-2">
           <button
             onClick={() => setSelectedTable("dealAnalysis")}
-            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
             Deal Analysis
           </button>
           <button
             onClick={() => setSelectedTable("carryCosts")}
-            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
             Carry Costs
           </button>
           <button
             onClick={() => setSelectedTable("hardMoney")}
-            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
             Takedown/Hard Money
           </button>
           <button
             onClick={() => setSelectedTable("TAKEOUT/REFINANCE Mortgage Calculator")}
-            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
             TAKEOUT/REFINANCE Mortgage Calculator
           </button>
           <button
             onClick={() => setSelectedTable("BRRRR")}
-            className="px-5 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
+            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
           >
             BRRRR CASH FLOW
           </button>
+          
         </div>
   
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap items-center">
           {selectedTable === "dealAnalysis" && (
 
             <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
