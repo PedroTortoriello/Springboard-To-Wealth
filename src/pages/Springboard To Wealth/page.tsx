@@ -198,48 +198,55 @@ const TableDisplay: React.FC = () => {
 
   return (
     <Header>
-      <div className="p-6">
-        <div className="mb-6 flex flex-wrap space-x-4 justify-center sm:space-x-2">
-          <button
-            onClick={() => setSelectedTable("dealAnalysis")}
-            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
-          >
-            Deal Analysis
-          </button>
-          <button
-            onClick={() => setSelectedTable("carryCosts")}
-            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
-          >
-            Carry Costs
-          </button>
-          <button
-            onClick={() => setSelectedTable("hardMoney")}
-            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
-          >
-            Takedown/Hard Money
-          </button>
-          <button
-            onClick={() => setSelectedTable("TAKEOUT/REFINANCE Mortgage Calculator")}
-            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
-          >
-            TAKEOUT/REFINANCE Mortgage Calculator
-          </button>
-          <button
-            onClick={() => setSelectedTable("BRRRR")}
-            className="px-5 py-2 bg-[#44C63A] text-white rounded-md shadow-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out w-full sm:w-auto mb-2 sm:mb-0"
-          >
-            BRRRR CASH FLOW
-          </button>
-          
-        </div>
+      <div className="">
+      <div className="flex flex-wrap justify-center gap-2">
+  <button 
+    onClick={() => setSelectedTable("dealAnalysis")}
+    className="px-5 py-2 bg-[#44C63A] text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600 transition duration-200 ease-in-out w-[200px]"
+  >
+    Deal Analysis
+  </button>
+
+  <button
+    onClick={() => setSelectedTable("carryCosts")}
+    className="px-5 py-2 bg-[#44C63A] text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600 transition duration-200 ease-in-out w-[200px]"
+  >
+    Carry Costs
+  </button>
+
+  <button
+    onClick={() => setSelectedTable("hardMoney")}
+    className="px-5 py-2 bg-[#44C63A] text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600 transition duration-200 ease-in-out w-[200px]"
+  >
+    Takedown/Hard Money
+  </button>
+
+  <button
+    onClick={() => setSelectedTable("TAKEOUT/REFINANCE Mortgage Calculator")}
+    className="px-5 py-2 bg-[#44C63A] text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600 transition duration-200 ease-in-out w-[200px]"
+  >
+    TAKEOUT/REFINANCE
+  </button>
+
+  <button
+    onClick={() => setSelectedTable("BRRRR")}
+    className="px-5 py-2 bg-[#44C63A] text-white rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 hover:bg-green-600 transition duration-200 ease-in-out w-[200px]"
+  >
+    BRRRR CASH FLOW
+  </button>
+</div>
+
+
   
-        <div className="flex flex-wrap items-center">
+        <div className="flex flex-wrap items-center justify-center mt-5">
           {selectedTable === "dealAnalysis" && (
 
-            <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
+            <div className="w-full md:w-full lg:w-full px-3 mb-6"> 
               <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">DEAL ANALYSIS CALCULATOR</h2>
-  
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">DEAL ANALYSIS CALCULATOR</h2>
+                  <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+                    Scroll right to enter the values
+                  </div>
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse font-helvetica min-w-[400px]">
                       <thead>
@@ -266,7 +273,7 @@ const TableDisplay: React.FC = () => {
                                 >
                                   {label}
                                 </span>
-                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click on the title to view the description</span>
                               </div>
                               {selectedDescription === description && <Tooltip message={description} />}
                             </td>
@@ -287,12 +294,14 @@ const TableDisplay: React.FC = () => {
                 </div>
              
   
-              <div className="md:max-w-[600px] lg:w-full px-3 mb-6">
+              <div className="w-full md:w-full lg:w-full px-3 mb-6">
                 <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
                   <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Results</h2>
-  
+                  <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+                    Scroll right to enter the values
+                  </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse font-helvetica max-w-[600px]">
+                    <table className="w-full border-collapse font-helvetica min-w-[400px]">
                       <thead>
                         <tr>
                           <th className="py-3 px-4 border-b border-gray-200 text-left">Description</th>
@@ -319,7 +328,7 @@ const TableDisplay: React.FC = () => {
                                 >
                                   {label}
                                 </span>
-                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click to view description</span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click on the title to view the description</span>
                               </div>
                               {selectedDescription === description && <Tooltip message={description} />}
                             </td>
@@ -340,6 +349,9 @@ const TableDisplay: React.FC = () => {
             <div className="w-full md:w-full lg:w-1/2 px-3 mb-6"> 
               <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Carry Costs</h2>
+                  <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+                    Scroll right to enter the values
+                  </div>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse font-helvetica min-w-[400px]">
                     <thead>
@@ -441,6 +453,9 @@ const TableDisplay: React.FC = () => {
             <div className="w-full md:w-1/2 lg:w-1/2 px-3 mb-6">
               <div className="p-6 shadow-lg rounded-lg">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">Takedown/Hard Money</h2>
+                <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+  Scroll right to enter the values
+</div>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse font-helvetica">
                     <thead>
@@ -475,6 +490,9 @@ const TableDisplay: React.FC = () => {
             {selectedTable === "TAKEOUT/REFINANCE Mortgage Calculator" && (
             <div className="p-6 shadow-lg rounded-lg">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 uppercase">TAKEOUT/REFINANCE Mortgage Calculator</h2>
+              <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+  Scroll right to enter the values
+</div>
               <table className="w-full border-collapse font-helvetica">
                 <thead>
                   <tr>
@@ -539,6 +557,9 @@ const TableDisplay: React.FC = () => {
             {selectedTable === "BRRRR" && (
             <div className="p-6 shadow-lg rounded-lg overflow-x-auto">
   <h2 className="text-xl font-semibold text-black mb-4">BRRRR CASH FLOW</h2>
+  <div className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-md w-fit md:hidden ">
+  Scroll right to enter the values
+</div>
   <div className="overflow-x-auto">
     <table className="w-full border-collapse font-helvetica min-w-[400px]">
       <thead>
@@ -575,8 +596,9 @@ const TableDisplay: React.FC = () => {
             )}
           </div>
         </div>
-      
+
       </Header>
+      
   );
 };
 
