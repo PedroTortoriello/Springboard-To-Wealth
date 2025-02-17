@@ -27,15 +27,9 @@ const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
 
       {/* Footer */}
       <footer className="bg-gray text-white shadow-md p-4 flex items-center justify-between">
-        <p className="text-black-2 font-helvetica font-sm">&copy; 2025 Springboard to Wealth. Todos os direitos reservados.</p>
-        {/* Button */}
-        <a
-          href="https://www.springboard-community.com/home"
-          target="_blank" 
-          className="mt-2 inline-block bg-[#44C63A] text-white text-sm py-2 px-5 rounded-3xl hover:bg-[#36A02C] transition duration-300"
-        >
-          Join Springboard to Wealth
-        </a>
+      <p className="text-black-2 font-helvetica font-medium text-sm">
+  &copy; 2025 Springboard to Wealth. All rights reserved.
+</p>
 
       </footer>
     </div>

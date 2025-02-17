@@ -186,12 +186,13 @@ const TableDisplay: React.FC = () => {
 
   function Tooltip({ message }: { message: string }) {
     return (
-      <div className="absolute -top-10 left-0 w-64 p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
+      <div className="absolute -top-10 left-1/2 sm:-translate-x-1/2 -translate-x-[60%] w-auto inline-block p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
         {message}
       </div>
     );
   }
-
+  
+  
   useEffect(() => {
     calculate();
   }, [purchasePrice, costPerSqFt, sqFootage, finishedValue, salesPropertyPercent, expectedCarry, UtilitiesInsurance, HardmoneyDown, InterestRate, LoanDown, Points, Reserve]);
@@ -595,6 +596,16 @@ const TableDisplay: React.FC = () => {
 </div>
             )}
           </div>
+          <div className="flex justify-center items-center mt-10">
+  <a
+    href="https://www.springboard-community.com/c/start-here-brrrr-to-wealth/"
+    target="_blank"
+    className="bg-[#44C63A] text-white text-sm py-2 px-5 rounded-3xl hover:bg-[#36A02C] transition duration-300"
+  >
+    Join Springboard to Wealth
+  </a>
+</div>
+
         </div>
 
       </Header>
