@@ -183,14 +183,20 @@ const TableDisplay: React.FC = () => {
     potentialProfit: "Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit."
   };
   
-  function Tooltip({ message }: { message: string, onClose: () => void }) {
+
+
+  function Tooltip({ message, onClose }: { message: string, onClose: () => void }) {
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        onClose(); // Fecha a tooltip após 3 segundos
+      }, 2500); // 3000ms = 3 segundos
+  
+      return () => clearTimeout(timer); // Limpa o temporizador caso o componente seja desmontado antes
+    }, [onClose]);
     return (
       <div className="absolute left-1/2 transform -translate-x-1/2 w-auto inline-block p-4 bg-gray text-black text-sm rounded shadow-lg z-10">
         <div className="relative">
-          <span>{message}</span>
-          <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">
-            Click <span className="font-bold text-[#44C63A]">on the title</span> again to close the description
-          </span>
+          <span className="block">{message}</span>
         </div>
       </div>
     );
