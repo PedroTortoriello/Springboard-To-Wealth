@@ -183,14 +183,24 @@ const TableDisplay: React.FC = () => {
     potentialProfit: "Potential profit in dollars and percentage without carry costs (e.g., financing costs). Builders usually aim for 15% or more profit."
   };
   
-
-  function Tooltip({ message }: { message: string }) {
+  function Tooltip({ message }: { message: string, onClose: () => void }) {
     return (
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-auto inline-block p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
-        {message}
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-auto inline-block p-4 bg-gray text-black text-sm rounded shadow-lg z-10">
+        <div className="relative">
+          <span>{message}</span>
+          <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">
+            Click <span className="font-bold text-[#44C63A]">on the title</span> again to close the description
+          </span>
+        </div>
       </div>
     );
   }
+  
+  
+  
+  const handleTooltipClose = () => {
+    setSelectedDescription(null);
+  };
   
   
   useEffect(() => {
@@ -274,9 +284,9 @@ const TableDisplay: React.FC = () => {
                                 >
                                   {label}
                                 </span>
-                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click on the title to view the description</span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click <span className="font-bold text-[#44C63A]">on the title</span> to view the description</span>
                               </div>
-                              {selectedDescription === description && <Tooltip message={description} />}
+                              {selectedDescription === description && <Tooltip message={description} onClose={handleTooltipClose} />}
                             </td>
                             <td className="py-3 px-4 border-b border-gray-200">
                               <input
@@ -329,9 +339,9 @@ const TableDisplay: React.FC = () => {
                                 >
                                   {label}
                                 </span>
-                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click on the title to view the description</span>
+                                <span className="ml-2 text-xs text-gray-500 mt-1 font-semibold">Click <span className="font-bold text-[#44C63A]">on the title</span> to view the description</span>
                               </div>
-                              {selectedDescription === description && <Tooltip message={description} />}
+                              {selectedDescription === description && <Tooltip message={description} onClose={handleTooltipClose} />}
                             </td>
                             <td className="py-3 px-4 border-b border-gray-200 font-bold text-gray-700 min-w-[150px]">
                               {value}
