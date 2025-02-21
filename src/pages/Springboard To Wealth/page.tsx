@@ -186,7 +186,7 @@ const TableDisplay: React.FC = () => {
 
   function Tooltip({ message }: { message: string }) {
     return (
-      <div className="absolute -top-10 left-1/2 sm:-translate-x-1/2 -translate-x-[60%] w-auto inline-block p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-auto inline-block p-2 bg-gray text-black text-sm rounded shadow-lg z-10">
         {message}
       </div>
     );
